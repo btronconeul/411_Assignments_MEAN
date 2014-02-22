@@ -1,1 +1,1 @@
-<div ng-include="'partials/navbar.html'"></div><ul><li data-ng-repeat="project in projects">{{project.name}}</li></ul>
+<div ng-include="'partials/navbar.html'"></div><ul data-ng-repeat="project in projects"><div class="well"><li>Group Name: {{project.name}}</li><li>Github: {{project.github}}</li><li>Members: {{project.members}}</li></div></ul>

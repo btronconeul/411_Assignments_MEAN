@@ -6,17 +6,25 @@ describe('Controller: ProjectCtrl', function () {
   beforeEach(module('mean410App'));
 
   var ProjectCtrl,
-    scope;
+    scope,
+    apiUrl,
+    $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($_httpBackend_,$controller, $rootScope) {
     scope = $rootScope.$new();
+    apiUrl = '/api/projects'
+    $httpBackend = $_httpBackend_;
+      $_httpBackend_.expectGET(apiUrl)
+          .respond(['Team MVC', 'Django for Life', 'I Love Spring']);
     ProjectCtrl = $controller('ProjectCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach project to the scope', function () {
+    expect(scope.projects).toBeUndefined();
+    $httpBackend.flush();
+    expect(scope.projects.length).toBe(3);
   });
 });

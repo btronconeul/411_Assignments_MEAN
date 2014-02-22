@@ -1,5 +1,11 @@
 div(ng-include='\'partials/navbar.html\'')
-ul
-    li(data-ng-repeat="project in projects")
-        |{{project.name}}
+ul(data-ng-repeat="project in projects")
+    div.well
+        li
+            |Group Name: {{project.name}}
+        li
+            |Github: {{project.github}}
+        li
+            |Members: {{project.members}}
+
 
