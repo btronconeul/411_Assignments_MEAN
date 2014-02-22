@@ -25,6 +25,10 @@ angular.module('mean410App', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+       .when('/projects', {
+        templateUrl: 'partials/projects',
+        controller: 'ProjectCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });
