@@ -1,11 +1,16 @@
 div(ng-include='\'partials/navbar.html\'')
-ul(data-ng-repeat="project in projects")
-    div.well
-        li
-            |Group Name: {{project.name}}
-        li
-            |Github: {{project.github}}
-        li
-            |Members: {{project.members}}
+.margin-bottom-20
+    a(href="/createproject")
+        p.btn.btn-default.m Create New
+.panel.panel-primary(data-ng-repeat="project in projects")
+    .panel-heading
+        .panel-title
+            |{{project.name}}
+    .panel-body
+        h4.underline GitHub:
+        |{{project.github}}
+
+
+
 
 

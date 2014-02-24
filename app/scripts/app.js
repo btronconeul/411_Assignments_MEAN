@@ -29,6 +29,10 @@ angular.module('mean410App', [
         templateUrl: 'partials/projects',
         controller: 'ProjectCtrl'
         })
+        .when('/createproject', {
+            templateUrl: 'partials/addProject',
+            controller: 'ProjectCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });

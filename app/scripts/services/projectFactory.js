@@ -6,7 +6,12 @@ angular.module('mean410App')
         projectFactory = {};
 
         projectFactory.getProjects = function(){
-            return $http.get(projectUrl)
+            return $http.get(projectUrl);
         }
+
+        projectFactory.createProject = function(proj){
+            return $http.post(projectUrl, proj);
+        }
+        //TODO Finish CRUD methods
         return projectFactory;
   }]);

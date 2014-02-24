@@ -2,13 +2,11 @@
   ul.nav.nav-pills.pull-right
     li(ng-repeat='item in menu', ng-class='{active: isActive(item.link)}')
       a(ng-href='{{item.link}}') {{item.title}}
+    li(ng-hide='currentUser', ng-class='{active: isActive("/projects")}')
+      a(href='/projects') Projects
     li(ng-hide='currentUser', ng-class='{active: isActive("/login")}')
       a(href='/login') Login
-    li(ng-hide='currentUser', ng-class='{active: isActive("/signup")}')
-      a(href='/projects') Projects
-    li(ng-hide='currentUser', ng-class='{active: isActive("/signup")}')
-      a(href='/signup') Sign up
     li(ng-show='currentUser', ng-class='{active: isActive("/logout")}')
       a(href='', ng-click='logout()') Logout
   h3.text-muted
-      |Project 411
+      |CIS 411 Assignment 5
