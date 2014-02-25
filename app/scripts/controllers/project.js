@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mean410App')
-  .controller('ProjectCtrl', function ($scope, projectFactory) {
+  .controller('ProjectCtrl', function ($scope, $location, projectFactory) {
     $scope.projects;
     $scope.status;
 
@@ -25,12 +25,16 @@ angular.module('mean410App')
                 members: [this.memberOne, this.memberTwo, this.memberThree]
             }
             projectFactory.createProject(newProject)
-                .success(function(){
-                    $scope.status = 'Project' + newProject.name + 'has been added!';
+                .success(function(response){
+                    $location.path('projects');
+                    $scope.projects.push(newProject);
+                    $scope.status = "Your project " + newProject.name + " has been added!";
                 })
                 .error(function(error){
                     $scope.status = 'Your project could not be added!';
                 })
 
         };
+
+
   });

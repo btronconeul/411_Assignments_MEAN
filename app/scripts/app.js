@@ -29,6 +29,10 @@ angular.module('mean410App', [
         templateUrl: 'partials/projects',
         controller: 'ProjectCtrl'
         })
+        .when('/projects/:projectId', {
+            templateUrl: 'partials/viewProject',
+            controller: 'ProjectCtrl'
+        })
         .when('/createproject', {
             templateUrl: 'partials/addProject',
             controller: 'ProjectCtrl'
