@@ -1,11 +1,11 @@
 div(ng-include='\'partials/navbar.html\'')
-.margin-bottom-20
+.margin-bottom-20(data-ng-init="getProjects()")
     a(href="/createproject")
         p.btn.btn-default.m Create New
 .panel.panel-primary(data-ng-repeat="project in projects")
     .panel-heading
         .panel-title
-            |{{project.name}}
+            a(href="/projects/{{project._id}}") {{project.name}}
     .panel-body
         h4.underline GitHub:
         |{{project.github}}

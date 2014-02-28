@@ -8,6 +8,7 @@ angular.module('mean410App', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
+        //Basic Views
       .when('/', {
         templateUrl: 'partials/main',
         controller: 'MainCtrl'
@@ -25,18 +26,23 @@ angular.module('mean410App', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
-       .when('/projects', {
-        templateUrl: 'partials/projects',
+
+        //Project Views
+      .when('/projects', {
+        templateUrl: 'partials/projects/projects',
         controller: 'ProjectCtrl'
         })
-        .when('/projects/:projectId', {
-            templateUrl: 'partials/viewProject',
-            controller: 'ProjectCtrl'
+       .when('/projects/:id', {
+        templateUrl: 'partials/projects/viewProject',
+        controller: 'ProjectCtrl'
         })
-        .when('/createproject', {
-            templateUrl: 'partials/addProject',
-            controller: 'ProjectCtrl'
+       .when('/createproject', {
+        templateUrl: 'partials/projects/addProject',
+        controller: 'ProjectCtrl'
         })
+
+
+        //Catch all
       .otherwise({
         redirectTo: '/'
       });

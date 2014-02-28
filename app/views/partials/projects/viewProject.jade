@@ -1,0 +1,9 @@
+div(ng-include='\'partials/navbar\'')
+
+.div(data-ng-init="findProject()")
+    h2.underline {{project.name}} - {{project.rating}}/10
+    h3 {{project.github}}
+    h4.underline Team Members
+    ul
+       li(data-ng-repeat="member in project.members") {{member}}
+
