@@ -1,6 +1,6 @@
 div(ng-include='\'partials/navbar.html\'')
 .row
-    form(name="create-project",method="POST",class="form-horizontal", data-ng-submit="createProject()")
+    form(name="create-project",method="POST",class="form-horizontal", data-ng-submit="create()")
         .form-group
             label(for="groupName") Group Name
             input(type="text", class="form-control", id="groupName",placeholder="Enter Group Name", data-ng-model="name", required)

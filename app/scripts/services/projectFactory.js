@@ -5,17 +5,28 @@ angular.module('mean410App')
     var projectUrl = '/api/projects',
         projectFactory = {};
 
-        projectFactory.getProjects = function(){
+        projectFactory.findAll = function(){
             return $http.get(projectUrl);
         }
 
-        projectFactory.createProject = function(proj){
-            return $http.post(projectUrl, proj);
+        projectFactory.create = function(project){
+            return $http.post(projectUrl, project);
         }
 
-        projectFactory.getProject = function(id){
+        projectFactory.findOne = function(id){
             return $http.get(projectUrl + '/' + id)
         }
-        //TODO Finish CRUD methods
+
+        projectFactory.update = function(project){
+            return $http.put(projectUrl + '/' + project._id, project)
+        }
+
+        projectFactory.delete = function (id) {
+            return $http.delete(projectUrl + '/' + id);
+        }
+
         return projectFactory;
+
+
   }]);
+

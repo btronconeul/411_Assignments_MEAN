@@ -1,35 +1,24 @@
 'use strict';
 
 angular.module('mean410App')
-       .controller('ProjectCtrl', function ($scope, $location,$routeParams, projectFactory) {
+       .controller('ProjectCtrl', function ($scope, $location, $routeParams, projectFactory) {
         $scope.project;
         $scope.projects;
         $scope.status;
 
-
-
-        $scope.getProjects = function getProjects(){
-            projectFactory.getProjects()
-                .success(function(projs){
-                    $scope.projects = projs;
-                })
-                .error(function (err) {
-                    console.log('Unable to load projects:' + err.message);
-                });
-        }
-        
-        $scope.createProject =  function(){
+        //CRUD for Projects
+        $scope.create =  function(){
             var newProject = {
                 name: this.name,
                 github: this.github,
                 rating: 0,
                 members: [this.memberOne, this.memberTwo, this.memberThree]
             };
-            projectFactory.createProject(newProject)
+            projectFactory.create(newProject)
                 .success(function (response) {
                     $location.path('projects');
-                    $scope.projects.push(newProject);
-                    $scope.status = "Your project " + newProject.name + " has been added!";
+                    $scope.projects.push(response);
+                    $scope.status = "Your project " + response.name + " has been added!";
                 })
                 .error(function (error) {
                     $scope.status = 'Your project could not be added!';
@@ -37,8 +26,18 @@ angular.module('mean410App')
 
         };
 
-        $scope.findProject = function(){
-            projectFactory.getProject($routeParams.id)
+        $scope.findAll = function (){
+            projectFactory.findAll()
+                .success(function(projs){
+                    $scope.projects = projs;
+                })
+                .error(function (err) {
+                    console.log('Unable to load projects:' + err.message);
+                });
+        }
+
+        $scope.findOne = function(){
+            projectFactory.findOne($routeParams.id)
                 .success(function (proj) {
                     $scope.project = proj;
                 })
@@ -47,5 +46,36 @@ angular.module('mean410App')
                 });
         };
 
+        $scope.update = function(){
+            var project = $scope.project;
+
+            projectFactory.update(project)
+                .success(function () {
+                    $location.path('projects')
+                })
+                .error(function (error) {
+                    console.log('Failed');
+                });
+        };
+
+        $scope.delete = function (id) {
+            projectFactory.delete(id)
+                .success(function () {
+                    $scope.status = 'Deleted Project!';
+                    for (var i = 0; i < $scope.projects.length; i++) {
+                        var cust = $scope.projects[i];
+                        if (cust.ID === id) {
+                            $scope.projects.splice(i, 1);
+                            break;
+                        }
+                    }
+                })
+                .error(function (error) {
+                    $scope.status = 'Unable to delete project: ' + error.message;
+                });
+        };
+
 
   });
+
+
