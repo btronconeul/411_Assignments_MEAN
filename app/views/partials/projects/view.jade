@@ -1,9 +1,25 @@
 div(ng-include='\'partials/navbar\'')
 
 .div(data-ng-init="findOne()")
-    h2.underline {{project.name}} - {{project.rating}}/10
-    h3 {{project.github}}
-    h4.underline Team Members
-    ul
-       li(data-ng-repeat="member in project.members") {{member}}
-
+    h2.underline {{project.name}} - Rating {{project.rating}}/10
+    h3 Github: {{project.github}}
+    hr
+    dl
+        dt Team Members
+        dd(data-ng-repeat="member in project.members") {{member}}
+    hr
+    h4 Comments
+    dl.dl-horizontal(data-ng-repeat="comment in project.comments")
+        dt {{comment.date | date}}
+        dd {{comment.body}}
+    hr
+    button.btn.btn-primary(data-ng-click="commentForm()")
+        span.glyphicon.glyphicon-user
+        |Add Comment
+    hr
+    form(name="create-project",method="POST",class="form-horizontal", data-ng-submit="addComment()", data-ng-show="isHidden")
+        .form-group
+            label(for="newComment") Comment
+            input(type="text", class="form-control", id="newComment",placeholder="Enter Comment", data-ng-model="newComment", required)
+        .form-group
+            button(type="submit", class="btn btn-default") Submit

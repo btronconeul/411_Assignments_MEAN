@@ -5,6 +5,7 @@ angular.module('mean410App')
         $scope.project;
         $scope.projects;
         $scope.status;
+        $scope.isHidden = false;
 
         //CRUD for Projects
         $scope.create =  function(){
@@ -57,6 +58,25 @@ angular.module('mean410App')
                     console.log('Failed');
                 });
         };
+
+        $scope.addComment = function () {
+            var updatedProject = $scope.project;
+            var today = new Date();
+            updatedProject.comments.push({body: this.newComment, date: today.getDate()});
+            projectFactory.update(updatedProject)
+                .success(function (response) {
+                    //$scope.project.comments.push(response.comments.pop());
+                    $scope.isHidden = !$scope.isHidden;
+                    $scope.newComment = "";
+                })
+                .error(function (error) {
+                    console.log('Failed');
+                });
+        }
+
+        $scope.commentForm = function () {
+            $scope.isHidden = !$scope.isHidden;
+        }
 
         $scope.delete = function (id) {
             projectFactory.delete(id)
